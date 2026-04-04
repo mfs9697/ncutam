@@ -78,9 +78,6 @@ body {
 }
 
 a {
-  text-decoration: none;
-}
-a {
   color: var(--link-color);
   -webkit-transition: all 0.24s ease-out;
   transition: all 0.24s ease-out;
@@ -93,6 +90,9 @@ a:active {
 }
 a:focus {
   outline: none;
+}
+a {
+  text-decoration: none;
 }
 
 .invert {
@@ -481,8 +481,6 @@ select {
   padding: calc(var(--baseline) * 1.2) calc(var(--baseline) * 3);
   vertical-align: middle;
   width: 100%;
-  -webkit-appearance: none;
-  -moz-appearance: none;
 }
 @media all and (min-width: 37.5em) {
   [type=text],
@@ -495,6 +493,17 @@ select {
   select {
     width: auto;
   }
+}
+[type=text],
+[type=url],
+[type=tel],
+[type=number],
+[type=email],
+[type=search],
+textarea,
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 [type=text]:focus,
 [type=url]:focus,
@@ -775,31 +784,31 @@ textarea {
   width: auto;
 }
 .navbar .navbar__menu li a,
-.navbar .navbar__menu li span[aria-haspopup=true] {
+.navbar .navbar__menu li span[role=button] {
   color: var(--nav-link-color);
   display: block;
   padding: 0 0.6rem;
   -webkit-transition: all 0.24s ease-out;
   transition: all 0.24s ease-out;
+  cursor: pointer;
 }
 .navbar .navbar__menu li a:active, .navbar .navbar__menu li a:focus, .navbar .navbar__menu li a:hover,
-.navbar .navbar__menu li span[aria-haspopup=true]:active,
-.navbar .navbar__menu li span[aria-haspopup=true]:focus,
-.navbar .navbar__menu li span[aria-haspopup=true]:hover {
+.navbar .navbar__menu li span[role=button]:active,
+.navbar .navbar__menu li span[role=button]:focus,
+.navbar .navbar__menu li span[role=button]:hover {
   color: var(--nav-link-color-hover);
+  outline: none;
 }
-.navbar .navbar__menu li span {
+.navbar .navbar__menu li span:not([role=button]) {
   color: var(--nav-link-color);
   cursor: default;
   display: block;
   padding: 0 0.6rem;
 }
-.navbar .navbar__menu > li:hover > a, .navbar .navbar__menu > li:hover > span[aria-haspopup=true] {
+.navbar .navbar__menu > li:hover > a, .navbar .navbar__menu > li:hover > span[role=button], .navbar .navbar__menu > li:focus-within > a, .navbar .navbar__menu > li:focus-within > span[role=button] {
   color: var(--nav-link-color-hover);
 }
-.navbar .has-submenu:active > .navbar__submenu,
-.navbar .has-submenu:focus > .navbar__submenu,
-.navbar .has-submenu:hover > .navbar__submenu {
+.navbar .has-submenu:active > .navbar__submenu, .navbar .has-submenu:focus-within > .navbar__submenu, .navbar .has-submenu:hover > .navbar__submenu {
   left: 0;
   opacity: 1;
   -webkit-transform: scale(1);
@@ -807,9 +816,7 @@ textarea {
   visibility: visible;
   margin-top: 0.8rem;
 }
-.navbar .has-submenu:active > .navbar__submenu:before,
-.navbar .has-submenu:focus > .navbar__submenu:before,
-.navbar .has-submenu:hover > .navbar__submenu:before {
+.navbar .has-submenu:active > .navbar__submenu:before, .navbar .has-submenu:focus-within > .navbar__submenu:before, .navbar .has-submenu:hover > .navbar__submenu:before {
   content: "";
   height: 1rem;
   left: 0;
@@ -817,25 +824,21 @@ textarea {
   width: 100%;
   top: -1rem;
 }
-.navbar .has-submenu:active > .navbar__submenu.is-right-submenu,
-.navbar .has-submenu:focus > .navbar__submenu.is-right-submenu,
-.navbar .has-submenu:hover > .navbar__submenu.is-right-submenu {
+.navbar .has-submenu:active > .navbar__submenu.is-right-submenu, .navbar .has-submenu:focus-within > .navbar__submenu.is-right-submenu, .navbar .has-submenu:hover > .navbar__submenu.is-right-submenu {
   left: auto;
   right: 0;
   -webkit-transform-origin: right top;
           transform-origin: right top;
 }
-.navbar .has-submenu .has-submenu:active > .navbar__submenu,
-.navbar .has-submenu .has-submenu:focus > .navbar__submenu,
-.navbar .has-submenu .has-submenu:hover > .navbar__submenu {
+.navbar .has-submenu .has-submenu:active > .navbar__submenu, .navbar .has-submenu .has-submenu:focus-within > .navbar__submenu, .navbar .has-submenu .has-submenu:hover > .navbar__submenu {
   top: 0;
   margin-top: 0;
 }
-.navbar .has-submenu .has-submenu:active > .navbar__submenu.is-right-submenu,
-.navbar .has-submenu .has-submenu:focus > .navbar__submenu.is-right-submenu,
-.navbar .has-submenu .has-submenu:hover > .navbar__submenu.is-right-submenu {
-  top: 0;
-  margin-top: 0;
+.navbar .has-submenu .has-submenu:active > .navbar__submenu.is-right-submenu, .navbar .has-submenu .has-submenu:focus-within > .navbar__submenu.is-right-submenu, .navbar .has-submenu .has-submenu:hover > .navbar__submenu.is-right-submenu {
+  left: auto;
+  right: 0;
+  -webkit-transform-origin: right top;
+          transform-origin: right top;
 }
 .navbar .navbar__submenu {
   background: var(--lighter);
@@ -866,7 +869,7 @@ textarea {
   font-size: 0.8789062495rem;
 }
 .navbar .navbar__submenu li a,
-.navbar .navbar__submenu li span[aria-haspopup=true] {
+.navbar .navbar__submenu li span[role=button] {
   border-radius: calc(var(--border-radius) * 3);
   color: var(--nav-link-color-hover);
   padding: 0.5rem 1rem;
@@ -874,17 +877,17 @@ textarea {
   transition: all 0.24s ease;
 }
 .navbar .navbar__submenu li a:active, .navbar .navbar__submenu li a:focus, .navbar .navbar__submenu li a:hover,
-.navbar .navbar__submenu li span[aria-haspopup=true]:active,
-.navbar .navbar__submenu li span[aria-haspopup=true]:focus,
-.navbar .navbar__submenu li span[aria-haspopup=true]:hover {
+.navbar .navbar__submenu li span[role=button]:active,
+.navbar .navbar__submenu li span[role=button]:focus,
+.navbar .navbar__submenu li span[role=button]:hover {
   background: var(--page-bg);
   color: var(--nav-link-color);
 }
-.navbar .navbar__submenu li span {
+.navbar .navbar__submenu li span:not([role=button]) {
   color: var(--nav-link-color-hover) !important;
   padding: 0.5rem 1rem;
 }
-.navbar .navbar__submenu li:hover > a, .navbar .navbar__submenu li:hover > span[aria-haspopup=true] {
+.navbar .navbar__submenu li:hover > a, .navbar .navbar__submenu li:hover > span[role=button], .navbar .navbar__submenu li:focus-within > a, .navbar .navbar__submenu li:focus-within > span[role=button] {
   color: var(--nav-link-color);
 }
 .navbar .navbar__toggle {
@@ -904,7 +907,6 @@ textarea {
   text-transform: none;
   z-index: 2004;
   height: 3.2rem;
-  padding: 0;
   width: 3.2rem;
 }
 @media all and (min-width: 56.25em) {
@@ -918,6 +920,10 @@ textarea {
   outline: none;
   -webkit-transform: none;
           transform: none;
+}
+.navbar .navbar__toggle:focus-visible {
+  outline: 2px solid var(--black);
+  outline-offset: 2px;
 }
 .navbar .navbar__toggle-box {
   width: 20px;
@@ -1041,6 +1047,15 @@ textarea {
   left: calc(var(--baseline) * 2);
   top: 15px;
   position: relative;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
+}
+.navbar_mobile_overlay .navbar__menu li a[aria-haspopup=true][aria-expanded=true]::after,
+.navbar_mobile_overlay .navbar__menu li span[aria-haspopup=true][aria-expanded=true]::after {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
 }
 .navbar_mobile_overlay .navbar__submenu {
   margin: 0;
@@ -1115,6 +1130,15 @@ textarea {
   right: 0;
   top: 18px;
   position: absolute;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
+}
+.navbar_mobile_sidebar .navbar__menu li a[aria-haspopup=true][aria-expanded=true]::after,
+.navbar_mobile_sidebar .navbar__menu li .is-separator[aria-haspopup=true][aria-expanded=true]::after {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
 }
 .navbar_mobile_sidebar .navbar__submenu {
   margin: 0 0 0 24px;
@@ -1532,13 +1556,6 @@ textarea {
   margin-top: calc(var(--baseline) * 2);
 }
 .bio__desc a {
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.2em;
-  -webkit-text-decoration-skip: ink;
-          text-decoration-skip-ink: auto;
-}
-.bio__desc a {
   color: var(--link-color-hover);
   -webkit-transition: all 0.24s ease-out;
   transition: all 0.24s ease-out;
@@ -1551,6 +1568,13 @@ textarea {
 }
 .bio__desc a:focus {
   outline: none;
+}
+.bio__desc a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  -webkit-text-decoration-skip: ink;
+          text-decoration-skip-ink: auto;
 }
 
 .content__nav {
@@ -1660,7 +1684,7 @@ textarea {
   overflow: hidden;
 }
 
-.post__image:not(.post__image--wide):not(.post__image--full) {
+.post__image:not(.post__image--wide):not(.post__image--full):not(.post__image--center) {
   display: inline-block;
   margin-bottom: calc(var(--baseline) * 2 + 0.25vw);
 }
