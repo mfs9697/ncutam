@@ -1,0 +1,27 @@
+name: WP7 verify live legacy redirects
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+
+      - name: Install browser verifier
+        run: |
+          npm install --no-save --package-lock=false playwright
+          npx playwright install chromium
+
+      - name: Verify every mapped legacy URL against the live site
+        run: node scripts/wp7-live-verify.mjs
