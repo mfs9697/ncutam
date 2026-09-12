@@ -8,7 +8,9 @@ on:
     paths:
       - 'migration/legacy-routes.yaml'
       - 'scripts/wp7-redirects.mjs'
+      - 'scripts/wp7-live-verify.mjs'
       - '.github/workflows/wp7-prepare-cutover.yml'
+      - '.github/workflows/wp7-live-verify.yml'
 
 permissions:
   contents: write
@@ -37,6 +39,12 @@ jobs:
           node-version: 24
           cache: npm
           cache-dependency-path: target-site/package-lock.json
+
+      - name: Check WP7 script syntax
+        working-directory: source
+        run: |
+          node --check scripts/wp7-redirects.mjs
+          node --check scripts/wp7-live-verify.mjs
 
       - name: Build target NCUTAM section
         working-directory: target-site
