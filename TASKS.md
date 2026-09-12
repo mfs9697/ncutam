@@ -42,7 +42,7 @@ Move the Committee's public content from the current Publii-generated site into 
 3. **Target architecture — COMPLETE (2026-09-12).** Defined the exact `/ncutam/` and `/en/ncutam/` route hierarchy, global/local navigation, landing-page role, bilingual policy, shared-news canonical behavior, activity/document archives, sitemap/search implications, and target destinations for the legacy-content classes. See [`docs/WP3_TARGET_ARCHITECTURE.md`](docs/WP3_TARGET_ARCHITECTURE.md).
 4. **Content model — COMPLETE (2026-09-12).** Defined the concrete Astro collection/data model for news scope, evergreen pages, normalized institutions, members, governance, durable activities, documents/reports, media mentions, bilingual Markdown, collection relationships, route-generation inputs and a dedicated semantic validator. See [`docs/WP4_CONTENT_MODEL.md`](docs/WP4_CONTENT_MODEL.md).
 5. **Migration map — COMPLETE (2026-09-12).** Mapped all 26 canonical legacy sitemap URLs and the key Publii archive aliases to exact target routes/content IDs; fixed canonical activity/media IDs, verified Drive sources and target paths for core documents, defined original-image migration directories, isolated the unresolved 1992 document mapping as a verification gate, and added a machine-readable route map for redirect reuse. See [`docs/WP5_MIGRATION_MAP.md`](docs/WP5_MIGRATION_MAP.md) and [`migration/legacy-routes.yaml`](migration/legacy-routes.yaml).
-6. **Implementation — NEXT.** Implement the WP3–WP5 architecture in `mfs9697/inmech-site`, migrate structured data/content/assets in controlled batches, and add the NCUTAM-specific validation layer without carrying Publii presentation markup forward.
+6. **Implementation — ACTIVE (started 2026-09-12).** Infrastructure batch is implemented on `mfs9697/inmech-site` branch `feat/ncutam-wp6-infrastructure` in draft PR #114: typed NCUTAM collections, `news.scopes`, bilingual route registry, global/local navigation, landing/top-level section routes, one seeded durable activity, and filtered NCUTAM news views. The repository `npm run validate` workflow passes. Next: core structured data and verified content/document import.
 7. **Redirect / continuity plan.** Preserve important old URLs where technically feasible using the WP5 route map as the single redirect source; document unavoidable infrastructure limitations.
 8. **Validation.** Check internal/external links, missing assets, bilingual consistency, metadata, mobile rendering, accessibility basics, and NCUTAM-specific semantic integrity.
 9. **Update workflow.** Document how Committee news, documents, membership changes, conferences, meetings, governance data and media mentions will be maintained after migration.
@@ -70,10 +70,10 @@ Move the Committee's public content from the current Publii-generated site into 
 - The machine-readable `migration/legacy-routes.yaml` is the single source for the legacy-to-target mapping and should be reused by WP7 redirect/stub generation.
 
 ### Immediate next milestone
-**WP6 — implementation.** Begin with schema/infrastructure, then migrate core structured data, evergreen pages, verified documents, durable activities, media records and original assets, followed by shared-news scope and validation. Use the implementation order fixed in WP5.
+**WP6 — core structured-data/content import.** Populate institutions, members and current governance; migrate verified annual reports and governance PDFs; replace the top-level placeholder views with real data-driven rendering; then proceed to the remaining durable activities/media/assets and NCUTAM semantic validator.
 
 ### Status
-**ACTIVE — WP1 through WP5 complete; WP6 next.**
+**ACTIVE — WP1 through WP5 complete; WP6 infrastructure batch implemented and validated in draft PR #114.**
 
 ---
 
