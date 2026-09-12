@@ -34,25 +34,28 @@ Move the Committee's public content from the current Publii-generated site into 
 
 ### Authoritative repositories
 - Committee source / migration workspace: `mfs9697/ncutam`
-- Target Inmech Astro site: Institute website repository (cross-reference during implementation)
+- Target Inmech Astro site: `mfs9697/inmech-site`
 
 ### Work packages
-1. **Source inventory** — enumerate current Publii pages, documents, media, conference/news archive, leadership/membership data, and external links.
-2. **Content audit** — separate canonical Committee content from Publii-generated technical artifacts.
-3. **Target architecture** — define where NCUTAM lives within the Inmech Astro information architecture and establish Ukrainian/English requirements.
-4. **Content model** — define maintainable data/content structures for leadership, members, documents, conferences/news, contacts, and institutional information.
-5. **Migration map** — map each canonical old page/resource to its target Astro route.
-6. **Implementation** — migrate content and assets into the target repository without carrying Publii presentation markup forward unnecessarily.
-7. **Redirect / continuity plan** — preserve important old URLs where technically feasible and document unavoidable changes.
-8. **Validation** — check internal/external links, missing assets, bilingual consistency, metadata, mobile rendering, and accessibility basics.
-9. **Update workflow** — document how Committee news, documents, membership changes, and conferences will be maintained after migration.
-10. **Cutover / archive** — switch the public destination when validated; retain the Publii export as historical source material rather than the active content system.
+1. **Source inventory — COMPLETE (2026-09-12).** Enumerated the published Publii pages, archive views, documents/media, conference/news material, governance/membership content, and the relevant target-site structures already present in Inmech Astro.
+2. **Content audit — COMPLETE (2026-09-12).** Classified legacy content as KEEP / MERGE / REDIRECT / DROP, separated durable institutional records from publishing artifacts, established source precedence, and defined the recommended news/media treatment. See [`docs/WP2_CONTENT_AUDIT.md`](docs/WP2_CONTENT_AUDIT.md).
+3. **Target architecture — NEXT.** Define the NCUTAM route hierarchy inside Inmech Astro, Ukrainian/English behavior, shared-news integration, navigation, and the relationship between landing, governance, members, meetings, conferences/activities, documents/reports, expert initiatives, and media mentions.
+4. **Content model.** Define maintainable data/content structures for leadership, members, documents, conferences/activities, meetings, news scope, contacts, and institutional information.
+5. **Migration map.** Map each canonical old page/resource to its target Astro route.
+6. **Implementation.** Migrate content and assets into the target repository without carrying Publii presentation markup forward unnecessarily.
+7. **Redirect / continuity plan.** Preserve important old URLs where technically feasible and document unavoidable changes.
+8. **Validation.** Check internal/external links, missing assets, bilingual consistency, metadata, mobile rendering, and accessibility basics.
+9. **Update workflow.** Document how Committee news, documents, membership changes, conferences, meetings, and governance data will be maintained after migration.
+10. **Cutover / archive.** Switch the public destination when validated; retain the Publii export as historical source material rather than the active content system.
+
+### Architectural decision established by WP2
+NCUTAM should **not** maintain a second independent news collection. Committee news should use the existing Inmech `news` collection with an explicit NCUTAM organizational scope/section and be rendered as a filtered view within the Committee section. Durable activities (General Meetings, conferences, major expert initiatives) should have their own canonical records instead of surviving only as news posts. External media coverage should normally be represented as short press-mention records linking to the original source.
 
 ### Immediate next milestone
-Produce the source inventory and a proposed Astro target architecture before making content-level migration changes.
+**WP3 — target Astro architecture.** Produce the route/navigation proposal and decide the concrete Astro structures before content-level migration begins.
 
 ### Status
-**ACTIVE — high priority.**
+**ACTIVE — WP1 and WP2 complete; WP3 next.**
 
 ---
 
