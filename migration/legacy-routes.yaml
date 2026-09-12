@@ -54,8 +54,8 @@ routes:
 
   - legacy: "/kontakti.html"
     action: merge
-    target: "/ncutam/#contacts"
-    targetEn: "/en/ncutam/#contacts"
+    target: "/ncutam/#ncutam-contacts"
+    targetEn: "/en/ncutam/#ncutam-contacts"
     collection: ncutamPages
     recordId: home
     sourceOfTruth: "current Committee contact details and Institute base-organization data"
