@@ -42,23 +42,23 @@ Move the Committee's public content from the current Publii-generated site into 
 3. **Target architecture — COMPLETE (2026-09-12).** Defined the exact `/ncutam/` and `/en/ncutam/` route hierarchy, global/local navigation, landing-page role, bilingual policy, shared-news canonical behavior, activity/document archives, sitemap/search implications, and target destinations for the legacy-content classes. See [`docs/WP3_TARGET_ARCHITECTURE.md`](docs/WP3_TARGET_ARCHITECTURE.md).
 4. **Content model — COMPLETE (2026-09-12).** Defined the concrete Astro collection/data model for news scope, evergreen pages, normalized institutions, members, governance, durable activities, documents/reports, media mentions, bilingual Markdown, collection relationships, route-generation inputs and a dedicated semantic validator. See [`docs/WP4_CONTENT_MODEL.md`](docs/WP4_CONTENT_MODEL.md).
 5. **Migration map — COMPLETE (2026-09-12).** Mapped all 26 canonical legacy sitemap URLs and the key Publii archive aliases to exact target routes/content IDs; fixed canonical activity/media IDs, verified Drive sources and target paths for core documents, defined original-image migration directories, and added a machine-readable route map for redirect reuse. See [`docs/WP5_MIGRATION_MAP.md`](docs/WP5_MIGRATION_MAP.md) and [`migration/legacy-routes.yaml`](migration/legacy-routes.yaml).
-6. **Implementation — ACTIVE.** Implementing the WP3–WP5 architecture in `mfs9697/inmech-site` on branch `feat/ncutam-wp6-infrastructure`, draft PR #114. Completed and validated batches now include:
+6. **Implementation — COMPLETE (2026-09-12).** Implemented the WP3–WP5 architecture in `mfs9697/inmech-site` on branch `feat/ncutam-wp6-infrastructure`, draft PR #114. Completed and validated batches include:
    - schema/infrastructure: NCUTAM collections, shared-news `scopes`, bilingual top-level routes, global/local navigation, landing pages, and shared NCUTAM news filtering;
    - membership/institutions: reconciled **429-person snapshot (218 active, 211 in memoriam, 0 former)**, exactly 35 active members admitted in 2025, 48 normalized institutions, bilingual current-members and memorial views;
    - current governance: 17 linked leadership/Presidium assignments and approved responsibilities effective from 1 December 2025, rendered bilingually from structured data;
    - evergreen/activity/media: durable About and IUTAM content, generalized bilingual body utility, all 8 canonical activity records and category/detail archives, plus all 6 canonical outbound media-mention records;
-   - documents/reports: 7 core official PDFs plus 12 verified General Meeting archive PDFs migrated to stable `/documents/ncutam/...` paths, for **19 byte-pinned manifest PDFs** total; data-driven Documents/Reports views now include a dedicated General Meeting materials group;
+   - documents/reports: 7 core official PDFs plus 12 verified General Meeting archive PDFs migrated to stable `/documents/ncutam/...` paths, for **19 byte-pinned manifest PDFs** total; data-driven Documents/Reports views include a dedicated General Meeting materials group;
    - original visual assets: **19 full-size published photographs** migrated from the legacy site — 10 from Current Problems in Mechanics 2023, 4 from Mechanics: Present and Prospects 2024, and 5 from the General Meeting of 11 November 2025 — with Publii thumbnails/derivatives and unpublished stray images intentionally excluded;
    - activity integration: bilingual activity-detail pages render the verified galleries and meeting material packets from structured references; the 2024 conference preserves the four legacy captions;
    - route cleanup: duplicate Ukrainian/English `in-memoriam` route definitions removed, leaving one canonical data-driven route per language;
-   - validation: `check:ncutam` now validates membership/governance semantics, activity gallery paths/counts and bilingual alt text, activity-document references, while the document validator pins exact Git-blob hashes for all 19 published PDFs.
-   The latest complete target-repository validation is green. Remaining WP6 work is now limited to optional trusted profile-link enrichment for memorial records and the final visual/mobile/content/accessibility sweep.
-7. **Redirect / continuity plan — NEXT AFTER WP6.** Preserve important old URLs where technically feasible using the WP5 route map as the single redirect source; document unavoidable infrastructure limitations.
-8. **Validation — ACTIVE / MOSTLY COMPLETE.** Build, sitemap, landmarks, internal links, membership/governance semantics, activity assets and document-byte integrity are automated. Final visual/mobile/accessibility review remains.
+   - validation: `check:ncutam` validates membership/governance semantics, activity gallery paths/counts and bilingual alt text, activity-document references, while the document validator pins exact Git-blob hashes for all 19 published PDFs;
+   - final visual/mobile/content/accessibility sweep: all **46 bilingual NCUTAM routes** were rendered in Chromium at desktop (1440×900) and mobile (390×844) sizes for **92 browser renders**. The sweep checked horizontal overflow, heading count, duplicate IDs, external-link safety, broken images, image alt text, stale migration placeholders, and WCAG 2.0/2.1 A/AA issues with axe-core. Corrections included the NCUTAM contact-anchor collision, generic eyebrow contrast, document-button styling, mobile/card wrapping, and Ukrainian desktop navigation crowding. The final browser sweep and full repository validation are green.
+7. **Redirect / continuity plan — NEXT.** Preserve important old URLs where technically feasible using the WP5 route map as the single redirect source; document unavoidable infrastructure limitations.
+8. **Validation — COMPLETE FOR WP6.** Build, sitemap, landmarks, internal links, membership/governance semantics, activity assets, document-byte integrity, and final desktop/mobile browser accessibility checks are green. Redirect/cutover validation belongs to WP7.
 9. **Update workflow.** Document how Committee news, documents, membership changes, conferences, meetings, governance data and media mentions will be maintained after migration.
 10. **Cutover / archive.** Switch the public destination when validated; retain the Publii export as historical source material rather than the active content system.
 
-### Architectural decisions established by WP2–WP5
+### Architectural decisions established by WP2–WP6
 - NCUTAM is a first-class top-level institutional section of Inmech, but not an Institute structural unit.
 - The global menu exposes the short item `НКУТПМ / NCUTAM`, linking to `/ncutam/` and `/en/ncutam/`.
 - All durable NCUTAM routes use paired Ukrainian/English paths with the same ASCII slug structure.
@@ -70,7 +70,7 @@ Move the Committee's public content from the current Publii-generated site into 
 - Durable activities use one Markdown collection with typed subdirectories: `meetings`, `conferences`, `initiatives`, and `international`.
 - Exact canonical activity IDs are fixed in WP5, including `meetings/2023-09-12`, `meetings/2025-11-11`, four conference records, `initiatives/paton-bridge`, and `international/iutam-general-members-meeting-2024`.
 - External media coverage is stored as short press-mention records linking to original sources and, where applicable, to a canonical activity/initiative.
-- Documents use a canonical manifest and stable `/documents/ncutam/...` public paths. Nineteen verified PDFs are now physically migrated and byte-pinned in validation, including the 2023 and 2025 General Meeting packets.
+- Documents use a canonical manifest and stable `/documents/ncutam/...` public paths. Nineteen verified PDFs are physically migrated and byte-pinned in validation, including the 2023 and 2025 General Meeting packets.
 - Only full-size visual assets demonstrably published on canonical legacy pages are migrated; generated Publii thumbnails, responsive derivatives and unpublished stray media are excluded.
 - The 1992 regulation ambiguity was resolved by recovering the actual `Положення про Комітет.pdf`; the 1992 regulation is historical/superseded, while Resolution No. 26 of 24 January 2024 contains the current Regulation.
 - Evergreen home/About/IUTAM narrative uses bilingual Markdown; English routes contain meaningful English content rather than Ukrainian text inside an English shell.
@@ -78,12 +78,13 @@ Move the Committee's public content from the current Publii-generated site into 
 - A dedicated `check:ncutam` semantic validator runs in addition to existing Inmech build/link/sitemap checks; document validation additionally pins exact binary hashes.
 - Contacts live on the landing page; a separate canonical NCUTAM contacts route is unnecessary.
 - The machine-readable `migration/legacy-routes.yaml` is the single source for the legacy-to-target mapping and should be reused by WP7 redirect/stub generation.
+- WP6 is frozen only after a successful full bilingual browser sweep at desktop/mobile widths in addition to the repository validation suite.
 
 ### Immediate next milestone
-**WP6 — final visual/content sweep.** Review the complete bilingual NCUTAM section at desktop/mobile widths, check hierarchy and spacing, gallery presentation, document density, Ukrainian/English balance, captions, metadata, accessibility basics and weak/external links. Apply only evidence-based corrections, then freeze WP6 for WP7 redirect/cutover work. Optional memorial-profile source enrichment may be done only where trusted sources are readily verifiable and should not delay WP6 closure.
+**WP7 — redirects and cutover continuity.** Reuse `migration/legacy-routes.yaml` to implement the feasible legacy redirects/stubs, validate old-to-new continuity, document any hosting constraints, and prepare the final cutover/archive procedure. Optional memorial-profile source enrichment may still be done opportunistically where trusted sources are readily verifiable, but it is non-blocking and outside WP6 closure.
 
 ### Status
-**ACTIVE — WP1 through WP5 complete; WP6 content, assets, routes and automated validation are structurally complete and green; final visual/content review remains in draft PR #114.**
+**ACTIVE — WP1 through WP6 complete and green; WP7 redirect/cutover continuity is next. Draft PR #114 remains unmerged pending the redirect/cutover decision.**
 
 ---
 
