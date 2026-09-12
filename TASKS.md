@@ -39,8 +39,8 @@ Move the Committee's public content from the current Publii-generated site into 
 ### Work packages
 1. **Source inventory — COMPLETE (2026-09-12).** Enumerated the published Publii pages, archive views, documents/media, conference/news material, governance/membership content, and the relevant target-site structures already present in Inmech Astro.
 2. **Content audit — COMPLETE (2026-09-12).** Classified legacy content as KEEP / MERGE / REDIRECT / DROP, separated durable institutional records from publishing artifacts, established source precedence, and defined the recommended news/media treatment. See [`docs/WP2_CONTENT_AUDIT.md`](docs/WP2_CONTENT_AUDIT.md).
-3. **Target architecture — NEXT.** Define the NCUTAM route hierarchy inside Inmech Astro, Ukrainian/English behavior, shared-news integration, navigation, and the relationship between landing, governance, members, meetings, conferences/activities, documents/reports, expert initiatives, and media mentions.
-4. **Content model.** Define maintainable data/content structures for leadership, members, documents, conferences/activities, meetings, news scope, contacts, and institutional information.
+3. **Target architecture — COMPLETE (2026-09-12).** Defined the exact `/ncutam/` and `/en/ncutam/` route hierarchy, global/local navigation, landing-page role, bilingual policy, shared-news canonical behavior, activity/document archives, sitemap/search implications, and target destinations for the legacy-content classes. See [`docs/WP3_TARGET_ARCHITECTURE.md`](docs/WP3_TARGET_ARCHITECTURE.md).
+4. **Content model — NEXT.** Define maintainable Astro data/content structures for shared-news scope, governance, members, durable activities, documents/reports, media mentions, bilingual fields, route generation, and validation.
 5. **Migration map.** Map each canonical old page/resource to its target Astro route.
 6. **Implementation.** Migrate content and assets into the target repository without carrying Publii presentation markup forward unnecessarily.
 7. **Redirect / continuity plan.** Preserve important old URLs where technically feasible and document unavoidable changes.
@@ -48,14 +48,22 @@ Move the Committee's public content from the current Publii-generated site into 
 9. **Update workflow.** Document how Committee news, documents, membership changes, conferences, meetings, and governance data will be maintained after migration.
 10. **Cutover / archive.** Switch the public destination when validated; retain the Publii export as historical source material rather than the active content system.
 
-### Architectural decision established by WP2
-NCUTAM should **not** maintain a second independent news collection. Committee news should use the existing Inmech `news` collection with an explicit NCUTAM organizational scope/section and be rendered as a filtered view within the Committee section. Durable activities (General Meetings, conferences, major expert initiatives) should have their own canonical records instead of surviving only as news posts. External media coverage should normally be represented as short press-mention records linking to the original source.
+### Architectural decisions established by WP2–WP3
+- NCUTAM is a first-class top-level institutional section of Inmech, but not an Institute structural unit.
+- The global menu should expose the short item `НКУТПМ / NCUTAM`, linking to `/ncutam/` and `/en/ncutam/`.
+- All durable NCUTAM routes use paired Ukrainian/English paths with the same ASCII slug structure.
+- NCUTAM does **not** maintain a second independent news collection. `/ncutam/news/` is a filtered view of the shared Inmech `news` collection using explicit organizational scope.
+- News detail pages remain canonical under `/news/...` and `/en/news/...`; no duplicate `/ncutam/news/[slug]/` pages are created.
+- Durable activities (General Meetings, conferences, major expert initiatives) have their own canonical records under `/ncutam/activity/...`.
+- External media coverage is normally represented as short press-mention records linking to the original source.
+- Governance is consolidated into one canonical `governance` view rather than duplicated leadership/Presidium pages.
+- Contacts live on the landing page; a separate canonical NCUTAM contacts route is unnecessary.
 
 ### Immediate next milestone
-**WP3 — target Astro architecture.** Produce the route/navigation proposal and decide the concrete Astro structures before content-level migration begins.
+**WP4 — content model.** Define the concrete Astro collections/data structures and validation rules required to implement the WP3 route architecture before content migration begins.
 
 ### Status
-**ACTIVE — WP1 and WP2 complete; WP3 next.**
+**ACTIVE — WP1, WP2 and WP3 complete; WP4 next.**
 
 ---
 
