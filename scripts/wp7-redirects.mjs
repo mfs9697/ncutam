@@ -82,12 +82,35 @@ function sourceFileForLegacy(legacy) {
   return path.join(sourceRoot, relative);
 }
 
+function splitTarget(targetPath) {
+  const [beforeHash, fragment = ''] = targetPath.split('#', 2);
+  const pathname = beforeHash.split('?')[0];
+  return { pathname, fragment };
+}
+
 function targetFileForPath(targetPath) {
   if (!targetDir) return null;
-  const withoutHash = targetPath.split('#')[0].split('?')[0];
-  const relative = withoutHash.replace(/^\//, '');
-  if (!relative || withoutHash.endsWith('/')) return path.join(targetDir, relative, 'index.html');
+  const { pathname } = splitTarget(targetPath);
+  const relative = pathname.replace(/^\//, '');
+  if (!relative || pathname.endsWith('/')) return path.join(targetDir, relative, 'index.html');
   return path.join(targetDir, relative);
+}
+
+function validateTargetReference(targetPath, label) {
+  if (!targetDir) return;
+  const targetFile = targetFileForPath(targetPath);
+  if (!fs.existsSync(targetFile)) {
+    fail(`${label} route is missing from built site: ${targetPath} -> ${targetFile}`);
+  }
+
+  const { fragment } = splitTarget(targetPath);
+  if (!fragment) return;
+  const html = fs.readFileSync(targetFile, 'utf8');
+  const escapedFragment = fragment.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const idPattern = new RegExp(`\\bid=["']${escapedFragment}["']`);
+  if (!idPattern.test(html)) {
+    fail(`${label} fragment is missing from built site: ${targetPath} (expected id="${fragment}" in ${targetFile})`);
+  }
 }
 
 function escapeHtml(value) {
@@ -127,14 +150,8 @@ for (const entry of entries) {
   const sourceFile = sourceFileForLegacy(entry.legacy);
   if (!fs.existsSync(sourceFile)) fail(`legacy source path is missing: ${entry.legacy} -> ${sourceFile}`);
 
-  if (targetDir) {
-    const targetFile = targetFileForPath(entry.target);
-    if (!fs.existsSync(targetFile)) fail(`target route is missing from built site: ${entry.target} -> ${targetFile}`);
-    if (entry.targetEn) {
-      const targetEnFile = targetFileForPath(entry.targetEn);
-      if (!fs.existsSync(targetEnFile)) fail(`English target route is missing from built site: ${entry.targetEn} -> ${targetEnFile}`);
-    }
-  }
+  validateTargetReference(entry.target, `${entry.legacy} Ukrainian target`);
+  if (entry.targetEn) validateTargetReference(entry.targetEn, `${entry.legacy} English target`);
 }
 
 if (args.has('--apply')) {
@@ -167,4 +184,4 @@ if (args.has('--check-generated')) {
 }
 
 console.log(`WP7 route map is valid: ${canonical.length} canonical routes + ${aliases.length} archive aliases.`);
-if (targetDir) console.log(`All mapped Ukrainian and English targets exist in ${targetDir}.`);
+if (targetDir) console.log(`All mapped Ukrainian and English target routes and fragments exist in ${targetDir}.`);
