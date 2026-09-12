@@ -40,30 +40,36 @@ Move the Committee's public content from the current Publii-generated site into 
 1. **Source inventory — COMPLETE (2026-09-12).** Enumerated the published Publii pages, archive views, documents/media, conference/news material, governance/membership content, and the relevant target-site structures already present in Inmech Astro.
 2. **Content audit — COMPLETE (2026-09-12).** Classified legacy content as KEEP / MERGE / REDIRECT / DROP, separated durable institutional records from publishing artifacts, established source precedence, and defined the recommended news/media treatment. See [`docs/WP2_CONTENT_AUDIT.md`](docs/WP2_CONTENT_AUDIT.md).
 3. **Target architecture — COMPLETE (2026-09-12).** Defined the exact `/ncutam/` and `/en/ncutam/` route hierarchy, global/local navigation, landing-page role, bilingual policy, shared-news canonical behavior, activity/document archives, sitemap/search implications, and target destinations for the legacy-content classes. See [`docs/WP3_TARGET_ARCHITECTURE.md`](docs/WP3_TARGET_ARCHITECTURE.md).
-4. **Content model — NEXT.** Define maintainable Astro data/content structures for shared-news scope, governance, members, durable activities, documents/reports, media mentions, bilingual fields, route generation, and validation.
-5. **Migration map.** Map each canonical old page/resource to its target Astro route.
-6. **Implementation.** Migrate content and assets into the target repository without carrying Publii presentation markup forward unnecessarily.
+4. **Content model — COMPLETE (2026-09-12).** Defined the concrete Astro collection/data model for news scope, evergreen pages, normalized institutions, members, governance, durable activities, documents/reports, media mentions, bilingual Markdown, collection relationships, route-generation inputs and a dedicated semantic validator. See [`docs/WP4_CONTENT_MODEL.md`](docs/WP4_CONTENT_MODEL.md).
+5. **Migration map — NEXT.** Map every canonical legacy page/resource to its exact target route/content record, including merged aliases, source documents/assets, and redirect requirements.
+6. **Implementation.** Implement the WP3–WP4 architecture in `mfs9697/inmech-site` and migrate content/assets without carrying Publii presentation markup forward unnecessarily.
 7. **Redirect / continuity plan.** Preserve important old URLs where technically feasible and document unavoidable changes.
-8. **Validation.** Check internal/external links, missing assets, bilingual consistency, metadata, mobile rendering, and accessibility basics.
-9. **Update workflow.** Document how Committee news, documents, membership changes, conferences, meetings, and governance data will be maintained after migration.
+8. **Validation.** Check internal/external links, missing assets, bilingual consistency, metadata, mobile rendering, accessibility basics, and NCUTAM-specific semantic integrity.
+9. **Update workflow.** Document how Committee news, documents, membership changes, conferences, meetings, governance data and media mentions will be maintained after migration.
 10. **Cutover / archive.** Switch the public destination when validated; retain the Publii export as historical source material rather than the active content system.
 
-### Architectural decisions established by WP2–WP3
+### Architectural decisions established by WP2–WP4
 - NCUTAM is a first-class top-level institutional section of Inmech, but not an Institute structural unit.
 - The global menu should expose the short item `НКУТПМ / NCUTAM`, linking to `/ncutam/` and `/en/ncutam/`.
 - All durable NCUTAM routes use paired Ukrainian/English paths with the same ASCII slug structure.
-- NCUTAM does **not** maintain a second independent news collection. `/ncutam/news/` is a filtered view of the shared Inmech `news` collection using explicit organizational scope.
+- NCUTAM does **not** maintain a second independent news collection. The existing Inmech `news` collection receives `scopes`, defaulting to `['institute']`; `/ncutam/news/` filters records containing `ncutam`.
 - News detail pages remain canonical under `/news/...` and `/en/news/...`; no duplicate `/ncutam/news/[slug]/` pages are created.
-- Durable activities (General Meetings, conferences, major expert initiatives) have their own canonical records under `/ncutam/activity/...`.
-- External media coverage is normally represented as short press-mention records linking to the original source.
-- Governance is consolidated into one canonical `governance` view rather than duplicated leadership/Presidium pages.
+- Stable NCUTAM facts are managed as typed Astro collections rather than page-local arrays.
+- Institutions are normalized separately from members; member records reference institution IDs.
+- Members and governance are separate linked datasets; current leadership is derived from current governance assignments.
+- Durable activities use one Markdown collection with typed subdirectories: `meetings`, `conferences`, `initiatives`, and `international`. The `international` subtype is an archival refinement for durable IUTAM/international records, not a competing evergreen international section.
+- External media coverage is stored as short press-mention records linking to original sources and, where applicable, to a canonical activity/initiative.
+- Documents use a canonical manifest and stable `/documents/ncutam/...` public paths; unresolved 1992 mappings are not published until verified.
+- Evergreen home/About/IUTAM narrative uses bilingual Markdown; English routes must contain meaningful English content rather than Ukrainian text inside an English shell.
+- The existing news language-block logic should be generalized into a reusable bilingual-body utility.
+- A dedicated `check:ncutam` semantic validator is required in addition to the existing Inmech build/link/sitemap checks.
 - Contacts live on the landing page; a separate canonical NCUTAM contacts route is unnecessary.
 
 ### Immediate next milestone
-**WP4 — content model.** Define the concrete Astro collections/data structures and validation rules required to implement the WP3 route architecture before content migration begins.
+**WP5 — migration map.** Produce the exact legacy-to-target mapping, including canonical target record IDs, merged aliases, source-of-truth files, media/document dependencies, and redirect destinations. This should be the final planning layer before implementation begins.
 
 ### Status
-**ACTIVE — WP1, WP2 and WP3 complete; WP4 next.**
+**ACTIVE — WP1 through WP4 complete; WP5 next.**
 
 ---
 
