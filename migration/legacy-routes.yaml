@@ -1,0 +1,243 @@
+version: 1
+sourceSite: "https://mfs9697.github.io/ncutam/"
+targetSite: "https://inmech.kyiv.ua/"
+updated: "2026-09-12"
+
+routes:
+  - legacy: "/"
+    action: keep
+    target: "/ncutam/"
+    targetEn: "/en/ncutam/"
+    collection: ncutamPages
+    recordId: home
+    sourceOfTruth: "Publii home for published snapshot; verified institutional sources for durable facts"
+
+  - legacy: "/11-ta-mizhnarodna-naukova-konferenciya-matematichni-problemi-mehaniki-neodnoridnih-struktur.html"
+    action: keep
+    target: "/ncutam/activity/conferences/mathematical-problems-heterogeneous-structures-2024/"
+    targetEn: "/en/ncutam/activity/conferences/mathematical-problems-heterogeneous-structures-2024/"
+    collection: ncutamActivities
+    recordId: "conferences/mathematical-problems-heterogeneous-structures-2024"
+    sourceOfTruth: "legacy article; external organizer sources for verification"
+
+  - legacy: "/anons-mizhnarodna-naukova-konferenciya-aktualni-problemi-mehaniki-i-mashinoznavstva-2026.html"
+    action: merge
+    target: "/ncutam/activity/conferences/apmme-2026/"
+    targetEn: "/en/ncutam/activity/conferences/apmme-2026/"
+    collection: ncutamActivities
+    recordId: "conferences/apmme-2026"
+    sourceOfTruth: "legacy announcement plus final conference records and related Inmech news"
+
+  - legacy: "/dokumenti.html"
+    action: keep
+    target: "/ncutam/documents/"
+    targetEn: "/en/ncutam/documents/"
+    collection: ncutamDocuments
+    recordId: null
+    sourceOfTruth: "document manifest; Drive/official PDFs override legacy link labels"
+
+  - legacy: "/kerivnictvo-komitetu.html"
+    action: merge
+    target: "/ncutam/governance/"
+    targetEn: "/en/ncutam/governance/"
+    collection: ncutamGovernance
+    recordId: null
+    sourceOfTruth: "approved Presidium responsibility distribution dated 2025-12-01"
+
+  - legacy: "/konferenciya-aktualni-problemi-mehaniki-2023.html"
+    action: keep
+    target: "/ncutam/activity/conferences/current-problems-mechanics-2023/"
+    targetEn: "/en/ncutam/activity/conferences/current-problems-mechanics-2023/"
+    collection: ncutamActivities
+    recordId: "conferences/current-problems-mechanics-2023"
+    sourceOfTruth: "legacy article and original gallery; organizer/NASU links for verification"
+
+  - legacy: "/kontakti.html"
+    action: merge
+    target: "/ncutam/#contacts"
+    targetEn: "/en/ncutam/#contacts"
+    collection: ncutamPages
+    recordId: home
+    sourceOfTruth: "current Committee contact details and Institute base-organization data"
+
+  - legacy: "/mehanika-nadzvichayno-vazhliva-ale-duzhe-nedoocinena-v-ukrayini-nauka-intervyu-akademika-vyacheslava-bogdanova.html"
+    action: merge
+    target: "/ncutam/activity/media/#nasu-bogdanov-interview-2026-02-21"
+    targetEn: "/en/ncutam/activity/media/#nasu-bogdanov-interview-2026-02-21"
+    collection: ncutamMedia
+    recordId: "nasu-bogdanov-interview-2026-02-21"
+    sourceOfTruth: "original NASU interview; legacy article only as migration evidence"
+
+  - legacy: "/mizhnarodna-naukova-konferenciya-mehanika-suchasnist-i-perspektivi-2024.html"
+    action: keep
+    target: "/ncutam/activity/conferences/mechanics-present-and-prospects-2024/"
+    targetEn: "/en/ncutam/activity/conferences/mechanics-present-and-prospects-2024/"
+    collection: ncutamActivities
+    recordId: "conferences/mechanics-present-and-prospects-2024"
+    sourceOfTruth: "legacy article and original gallery; conference materials for verification"
+
+  - legacy: "/mizhnarodniy-soyuz-teoretichnoyi-i-prikladnoyi-mehaniki-iutam.html"
+    action: keep
+    target: "/ncutam/iutam/"
+    targetEn: "/en/ncutam/iutam/"
+    collection: ncutamPages
+    recordId: iutam
+    sourceOfTruth: "official IUTAM sources plus Committee historical records"
+
+  - legacy: "/naslidki-budut-fatalni-unian-pro-zakliki-naukovciv-shchodo-poryatunku-mostu-patona.html"
+    action: merge
+    target: "/ncutam/activity/initiatives/paton-bridge/"
+    targetEn: "/en/ncutam/activity/initiatives/paton-bridge/"
+    collection: ncutamActivities
+    recordId: "initiatives/paton-bridge"
+    relatedMediaId: "unian-paton-bridge-2026-02-26"
+    sourceOfTruth: "official Committee initiative/meeting decision plus original UNIAN coverage"
+
+  - legacy: "/naukova-spilnota-knuba-popovnila-lavi-nacionalnogo-komitetu.html"
+    action: merge
+    target: "/ncutam/activity/media/#knuba-membership-2023-12-16"
+    targetEn: "/en/ncutam/activity/media/#knuba-membership-2023-12-16"
+    collection: ncutamMedia
+    recordId: "knuba-membership-2023-12-16"
+    sourceOfTruth: "original KNUBA publication; membership facts reconciled with member data"
+
+  - legacy: "/novini.html"
+    action: redirect
+    target: "/ncutam/news/"
+    targetEn: "/en/ncutam/news/"
+    collection: news
+    recordId: null
+    sourceOfTruth: "generated filtered view; legacy page is empty"
+
+  - legacy: "/pamyat.html"
+    action: keep
+    target: "/ncutam/members/in-memoriam/"
+    targetEn: "/en/ncutam/members/in-memoriam/"
+    collection: ncutamMembers
+    recordId: null
+    sourceOfTruth: "legacy list reconciled into member status data"
+
+  - legacy: "/predstavnika-ukrayini-obrano-do-komitetu-rannoyi-karieri-iutam.html"
+    action: redirect
+    target: "/news/2026/2026-03-19-iutam-committee/"
+    targetEn: "/en/news/2026/2026-03-19-iutam-committee/"
+    collection: news
+    recordId: "2026/2026-03-19-iutam-committee"
+    sourceOfTruth: "existing bilingual Inmech news record"
+
+  - legacy: "/prezidiya-komitetu.html"
+    action: merge
+    target: "/ncutam/governance/"
+    targetEn: "/en/ncutam/governance/"
+    collection: ncutamGovernance
+    recordId: null
+    sourceOfTruth: "approved Presidium responsibility distribution dated 2025-12-01"
+
+  - legacy: "/pro-komitet.html"
+    action: keep
+    target: "/ncutam/about/"
+    targetEn: "/en/ncutam/about/"
+    collection: ncutamPages
+    recordId: about
+    sourceOfTruth: "official Committee/NASU documents; legacy page as published snapshot"
+
+  - legacy: "/profesorku-ntu-hpi-tetyanu-shmatko-obrano-do-skladu-nacionalnogo-komitetu.html"
+    action: merge
+    target: "/ncutam/activity/media/#ntu-khpi-shmatko-2026-01-27"
+    targetEn: "/en/ncutam/activity/media/#ntu-khpi-shmatko-2026-01-27"
+    collection: ncutamMedia
+    recordId: "ntu-khpi-shmatko-2026-01-27"
+    sourceOfTruth: "original institutional coverage plus member/meeting data"
+
+  - legacy: "/sklad.html"
+    action: keep
+    target: "/ncutam/members/"
+    targetEn: "/en/ncutam/members/"
+    collection: ncutamMembers
+    recordId: null
+    sourceOfTruth: "legacy member list reconciled against current Committee records"
+
+  - legacy: "/visoke-viznannya-naukovoyi-spilnoti-dnu-podyaka-nan-ukrayini-ta-novi-oblichchya-u-nacionalnomu-komiteti.html"
+    action: merge
+    target: "/ncutam/activity/media/#dnu-recognition-membership-2023-12-04"
+    targetEn: "/en/ncutam/activity/media/#dnu-recognition-membership-2023-12-04"
+    collection: ncutamMedia
+    recordId: "dnu-recognition-membership-2023-12-04"
+    sourceOfTruth: "original DNU coverage plus member/meeting records"
+
+  - legacy: "/zagalni-zbori-12-veresnya-2023.html"
+    action: merge
+    target: "/ncutam/activity/meetings/2023-09-12/"
+    targetEn: "/en/ncutam/activity/meetings/2023-09-12/"
+    collection: ncutamActivities
+    recordId: "meetings/2023-09-12"
+    sourceOfTruth: "richer 2023 meeting page plus meeting packet and official records"
+
+  - legacy: "/zagalni-zbori-2023.html"
+    action: keep
+    target: "/ncutam/activity/meetings/2023-09-12/"
+    targetEn: "/en/ncutam/activity/meetings/2023-09-12/"
+    collection: ncutamActivities
+    recordId: "meetings/2023-09-12"
+    sourceOfTruth: "richer legacy meeting page plus meeting packet and official records"
+
+  - legacy: "/zagalni-zbori-mizhnarodnogo-soyuzu-teoretichnoyi-ta-prikladnoyi-mehaniki-iutam.html"
+    action: keep
+    target: "/ncutam/activity/international/iutam-general-members-meeting-2024/"
+    targetEn: "/en/ncutam/activity/international/iutam-general-members-meeting-2024/"
+    collection: ncutamActivities
+    recordId: "international/iutam-general-members-meeting-2024"
+    sourceOfTruth: "legacy record verified against IUTAM event information"
+
+  - legacy: "/zagalni-zbori-nacionalnogo-komitetu-ukrayini-z-teoretichnoyi-i-prikladnoyi-mehaniki-11-listopada-2025-roku.html"
+    action: keep
+    target: "/ncutam/activity/meetings/2025-11-11/"
+    targetEn: "/en/ncutam/activity/meetings/2025-11-11/"
+    collection: ncutamActivities
+    recordId: "meetings/2025-11-11"
+    sourceOfTruth: "legacy meeting record, official decisions, report/presentation sources and original gallery"
+
+  - legacy: "/zagroza-ruynuvannya-realna-nacionalniy-komitet-zaklikaie-do-negaynogo-remontu-mostu-patona.html"
+    action: merge
+    target: "/ncutam/activity/initiatives/paton-bridge/"
+    targetEn: "/en/ncutam/activity/initiatives/paton-bridge/"
+    collection: ncutamActivities
+    recordId: "initiatives/paton-bridge"
+    relatedMediaId: "liga-paton-bridge-2026-03-25"
+    sourceOfTruth: "official Committee initiative/meeting decision plus original LIGA.net coverage"
+
+  - legacy: "/zviti.html"
+    action: keep
+    target: "/ncutam/documents/reports/"
+    targetEn: "/en/ncutam/documents/reports/"
+    collection: ncutamDocuments
+    recordId: null
+    sourceOfTruth: "final annual-report PDFs in Drive"
+
+archiveAliases:
+  - legacy: "/novini/"
+    action: redirect
+    target: "/ncutam/news/"
+    targetEn: "/en/ncutam/news/"
+  - legacy: "/m/"
+    action: redirect
+    target: "/ncutam/activity/media/"
+    targetEn: "/en/ncutam/activity/media/"
+  - legacy: "/konferenciyi/"
+    action: redirect
+    target: "/ncutam/activity/conferences/"
+    targetEn: "/en/ncutam/activity/conferences/"
+
+nonCanonicalArtifacts:
+  - pattern: "/authors/**"
+    action: drop
+    reason: "Publii author archive, not Committee content"
+  - pattern: "/page/**"
+    action: drop
+    reason: "Publii pagination"
+  - pattern: "/feed.xml"
+    action: drop
+    reason: "regenerate only if a target-site feed is intentionally introduced"
+  - pattern: "/feed.json"
+    action: drop
+    reason: "regenerate only if a target-site feed is intentionally introduced"
