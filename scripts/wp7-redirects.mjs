@@ -8,6 +8,12 @@ const mapPath = path.join(sourceRoot, 'migration', 'legacy-routes.yaml');
 const args = new Set(process.argv.slice(2));
 const targetDirArg = process.argv.find((arg) => arg.startsWith('--target-dir='));
 const targetDir = targetDirArg ? path.resolve(targetDirArg.slice('--target-dir='.length)) : null;
+const droppedArtifacts = [
+  path.join(sourceRoot, 'authors'),
+  path.join(sourceRoot, 'page'),
+  path.join(sourceRoot, 'feed.xml'),
+  path.join(sourceRoot, 'feed.json')
+];
 
 function fail(message) {
   console.error(`WP7 redirect check failed: ${message}`);
@@ -138,7 +144,11 @@ if (args.has('--apply')) {
     fs.writeFileSync(sourceFile, redirectHtml(entry.target));
   }
   fs.writeFileSync(path.join(sourceRoot, '404.html'), moved404Html());
+  for (const artifact of droppedArtifacts) {
+    fs.rmSync(artifact, { recursive: true, force: true });
+  }
   console.log(`Generated ${entries.length} legacy redirect stubs plus a moved-site 404 page.`);
+  console.log('Removed noncanonical Publii author/pagination/feed artifacts listed for drop in the migration map.');
 }
 
 if (args.has('--check-generated')) {
@@ -150,7 +160,10 @@ if (args.has('--check-generated')) {
     if (!html.includes(`rel="canonical" href="${escapeHtml(absoluteTarget)}"`)) fail(`${entry.legacy} has the wrong canonical target`);
     if (!html.includes('name="robots" content="noindex,follow"')) fail(`${entry.legacy} must be noindex,follow`);
   }
-  console.log(`Verified ${entries.length} generated legacy redirect stubs.`);
+  for (const artifact of droppedArtifacts) {
+    if (fs.existsSync(artifact)) fail(`noncanonical artifact should be absent after cutover preparation: ${artifact}`);
+  }
+  console.log(`Verified ${entries.length} generated legacy redirect stubs and noncanonical artifact cleanup.`);
 }
 
 console.log(`WP7 route map is valid: ${canonical.length} canonical routes + ${aliases.length} archive aliases.`);
