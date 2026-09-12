@@ -48,8 +48,9 @@ Move the Committee's public content from the current Publii-generated site into 
    - current governance: 17 linked leadership/Presidium assignments and approved responsibilities effective from 1 December 2025, rendered bilingually from structured data;
    - evergreen/activity/media: durable About and IUTAM content, generalized bilingual body utility, all 8 canonical activity records and category/detail archives, plus all 6 canonical outbound media-mention records;
    - documents/reports: 7 verified official PDFs migrated to stable `/documents/ncutam/...` paths, data-driven Documents/Reports views, and exact pinned Git-blob integrity checks for every manifest PDF;
+   - route cleanup: stale nested Ukrainian/English `in-memoriam/index.astro` placeholders removed, leaving one canonical data-driven memorial route per language with no Astro route-collision warnings;
    - validation: `check:ncutam` semantic validation and PDF-integrity validation are both integrated into the full `npm run validate` workflow.
-   The latest complete target-repository validation is green. Remaining WP6 work is limited to original galleries/images, any additional meeting packet PDFs worth preserving, optional trusted profile-link enrichment for memorial records, duplicate-route warning cleanup, and the final visual/content sweep.
+   The latest complete target-repository validation is green. Remaining WP6 work is limited to original galleries/images, any additional meeting packet PDFs worth preserving, optional trusted profile-link enrichment for memorial records, and the final visual/content sweep.
 7. **Redirect / continuity plan — NEXT AFTER WP6.** Preserve important old URLs where technically feasible using the WP5 route map as the single redirect source; document unavoidable infrastructure limitations.
 8. **Validation — ACTIVE / MOSTLY COMPLETE.** Build, sitemap, landmarks, internal links, membership/governance semantics and document-byte integrity are automated. Final visual/mobile/accessibility review remains.
 9. **Update workflow.** Document how Committee news, documents, membership changes, conferences, meetings, governance data and media mentions will be maintained after migration.
@@ -76,10 +77,10 @@ Move the Committee's public content from the current Publii-generated site into 
 - The machine-readable `migration/legacy-routes.yaml` is the single source for the legacy-to-target mapping and should be reused by WP7 redirect/stub generation.
 
 ### Immediate next milestone
-**WP6 — final cleanup sweep.** Remove duplicate `in-memoriam` route definitions, migrate original galleries/images and any additional meeting packet PDFs worth retaining, perform the final visual/content sweep, then freeze WP6 for WP7 redirect/cutover work.
+**WP6 — final asset and visual sweep.** Migrate original galleries/images and any additional meeting packet PDFs worth retaining, perform the final visual/content sweep, then freeze WP6 for WP7 redirect/cutover work.
 
 ### Status
-**ACTIVE — WP1 through WP5 complete; WP6 structurally complete and validated, with final asset/route/visual cleanup remaining in draft PR #114.**
+**ACTIVE — WP1 through WP5 complete; WP6 structurally complete and validated, with final asset/visual cleanup remaining in draft PR #114.**
 
 ---
 
