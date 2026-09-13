@@ -1,4 +1,4 @@
-name: WP7 verify live legacy redirects
+name: Legacy NCUTAM redirect continuity
 
 on:
   workflow_dispatch:
@@ -7,18 +7,12 @@ on:
       - main
     paths:
       - '.github/workflows/wp7-live-verify.yml'
-  workflow_run:
-    workflows:
-      - pages build and deployment
-    types:
-      - completed
 
 permissions:
   contents: read
 
 jobs:
   verify:
-    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
