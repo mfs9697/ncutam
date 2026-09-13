@@ -30,14 +30,16 @@ The production smoke set includes the Ukrainian and English NCUTAM landing pages
 
 ### 3. Exhaustive live verification
 
-- Live verifier workflow: `WP7 verify live legacy redirects`.
-- Verification run: `34743012863`.
-- Verification job: `103685812441`.
+- Initial live verifier workflow: `WP7 verify live legacy redirects`.
+- Initial verification run: `34743012863`.
+- Initial verification job: `103685812441`.
 - Result: **success**.
 
 Headless Chromium opened all **29 mapped legacy URLs** (26 canonical routes + 3 archive aliases) and required the final browser origin, path, query and fragment to match the exact mapped Inmech destination. All 29 passed.
 
 The verifier also opened a deliberately unknown legacy URL and confirmed that it remained on the legacy host, returned HTTP 404, and exposed the fallback link to the canonical NCUTAM landing page. That check passed as well.
+
+WP10 retained this verification mechanism under the workflow name `Legacy NCUTAM redirect continuity`. After the archival freeze, run `34751734835` (job `103709329851`) again passed all 29 mapped URLs plus the unknown-URL 404 check.
 
 ## Hosting constraint
 
@@ -72,31 +74,38 @@ The Publii artifacts classified as `drop` were removed from the active compatibi
 - `feed.xml`;
 - `feed.json`.
 
-The repository history remains the archival record of the original Publii export.
+WP10 subsequently froze the complete pre-cutover Publii export on `archive/publii-export-pre-cutover-2026-09-13` and removed remaining obsolete Publii runtime/derivative material from active `main`. See `docs/WP10_ARCHIVE_FREEZE.md`.
 
-## Automation
+## Automation after WP10
 
-Preparation workflow: `.github/workflows/wp7-prepare-cutover.yml`.
+The one-time preparation workflow `.github/workflows/wp7-prepare-cutover.yml` was retired in WP10 because it referenced completed migration feature branches and no longer has an operational role.
 
-It builds the target site, validates all mapped routes and fragments, regenerates the compatibility stubs from the route map, validates canonical/noindex markup, removes DROP artifacts and keeps the prepared branch reproducible.
+The retained continuity tooling is:
 
-Live verifier: `scripts/wp7-live-verify.mjs` with `.github/workflows/wp7-live-verify.yml`.
+- source map: `migration/legacy-routes.yaml`;
+- generator/validator: `scripts/wp7-redirects.mjs`;
+- live verifier: `scripts/wp7-live-verify.mjs`;
+- manual workflow: `.github/workflows/wp7-live-verify.yml`, now named `Legacy NCUTAM redirect continuity`.
 
-The verifier uses Chromium rather than relying on the first HTTP response, because the GitHub Pages compatibility layer performs client-side/static forwarding. Manual dispatch remains available for future continuity audits.
+The verifier uses Chromium rather than relying on the first HTTP response because the GitHub Pages compatibility layer performs client-side/static forwarding. Manual dispatch remains available for future continuity audits.
 
-## Rollback
+## Rollback after WP10
+
+The explicit full-source restore point is now:
+
+- branch `archive/publii-export-pre-cutover-2026-09-13`;
+- commit `8643b62ae0f1be9714c0edb741f9b17b5c9a79e8`.
 
 If a material target defect is discovered later:
 
-1. restore the original legacy Publii pages by reverting the cutover changes in `mfs9697/ncutam` from repository history;
-2. correct and redeploy the Inmech target;
-3. reactivate the compatibility stubs only after the target is healthy.
-
-No original legacy content was destroyed; the pre-cutover export remains recoverable from Git history.
+1. identify and correct the Inmech target defect;
+2. use the archival branch only if emergency restoration of the former Publii site is genuinely required;
+3. redeploy/update the compatibility layer only after the target is healthy;
+4. rerun the live redirect verifier.
 
 ## Completion criterion — satisfied
 
-WP7 required all of the following and all are now satisfied:
+WP7 required all of the following and all are satisfied:
 
 - Inmech PR #114 merged and deployed successfully;
 - deployment marker and NCUTAM production smoke checks green;
@@ -105,4 +114,4 @@ WP7 required all of the following and all are now satisfied:
 - all 29 mapped legacy URLs passed exact-destination Chromium verification;
 - unknown legacy URL passed the moved-site HTTP-404/fallback check.
 
-WP7 is therefore closed as **COMPLETE**. The next migration work package is WP9: document the ongoing NCUTAM content-maintenance workflow, followed by the final archival/freeze housekeeping in WP10.
+WP7 remains **COMPLETE**. The broader NCUTAM website migration, including the WP9 maintenance handoff and WP10 archival freeze, is now closed; normal website maintenance proceeds in `mfs9697/inmech-site`.
