@@ -1,51 +1,55 @@
-# NCUTAM — working repository
+# NCUTAM — legacy compatibility and Committee workspace
 
-This repository is the operational workspace for the **National Committee of Ukraine for Theoretical and Applied Mechanics (NCUTAM)**.
+This repository now has two deliberately separate roles for the **National Committee of Ukraine for Theoretical and Applied Mechanics (NCUTAM)**.
 
-The current static files are a Publii-generated export. Going forward, the repository should also hold the Committee's persistent working records, migration notes, tasks, and reporting evidence.
+## Public website
 
-## Institutional context
+The authoritative bilingual NCUTAM website is maintained in `mfs9697/inmech-site` and published under:
 
-NCUTAM is listed among the scientific councils, committees, and commissions of the National Academy of Sciences of Ukraine under the Mechanics and Machine Science Division. The chair is Academician Viacheslav Bohdanov.
+- `https://inmech.kyiv.ua/ncutam/`
+- `https://inmech.kyiv.ua/en/ncutam/`
 
-## Active workstreams
+Normal public-content changes — news, members, governance, activities, documents, reports, media records, evergreen text and galleries — belong in `mfs9697/inmech-site`. See `docs/NCUTAM_MAINTENANCE.md` in that repository.
 
-### 1. Website migration
+Do **not** update Committee public content in this repository.
 
-Move the Committee's current Publii site into the Institute of Mechanics web infrastructure (`inmech.kyiv.ua`) while preserving the Committee's identity, content, documents, conference archive, contacts, leadership information, and existing links where practical.
+## Role of this repository after migration
 
-Primary goals:
-- inventory the current Publii export;
-- define the target information architecture on the Inmech site;
-- migrate content and downloadable documents;
-- preserve/redirect legacy URLs where feasible;
-- validate internal links and bilingual/metadata consistency if introduced;
-- define a low-maintenance update workflow after migration.
+`mfs9697/ncutam` is retained for:
 
-### 2. NASU analytical note on the state and prospects of mechanics research
+- the GitHub Pages compatibility layer for legacy Publii URLs;
+- the authoritative legacy-to-current route map at `migration/legacy-routes.yaml`;
+- the redirect generator and live browser verifier in `scripts/`;
+- migration/cutover documentation and rollback evidence in `docs/`;
+- the Committee task register and non-website Committee project work, including the NASU analytical note.
 
-Under the extract from Protocol No. 17 of the Presidium of the National Academy of Sciences of Ukraine dated 24 June 2026, scientific councils, committees, and commissions are tasked with:
-- analysing general trends in the development of the relevant scientific directions in Ukraine and worldwide;
-- preparing analytical notes on the current state of research in the relevant fields and prospects for their development within NAS of Ukraine;
-- submitting the analytical materials to the Scientific and Organizational Department of the Presidium of NAS of Ukraine by **30 September 2026**.
+The compatibility pages are `noindex,follow` forwarding stubs. They are not an independently maintained website.
 
-For NCUTAM this should be treated as a major Committee-level analytical task, not merely as correspondence.
+## Frozen Publii archive
 
-## Repository role
+The complete pre-cutover Publii export is pinned on the read-only archival branch:
 
-Use this repository for:
-- website-migration source and implementation work;
-- Committee documents and factual records suitable for publication;
-- analytical-note drafts and supporting evidence;
-- conference and activity records;
-- Committee task tracking and milestone documentation.
+`archive/publii-export-pre-cutover-2026-09-13`
 
-Do **not** use this repository as the global personal activity tracker. Cross-cutting portfolio status and reuse for personal/institute reports belong in `mfs9697/activity-control`.
+Archive commit: `8643b62ae0f1be9714c0edb741f9b17b5c9a79e8`.
 
-## Immediate next steps
+That branch preserves the original pages, theme/runtime assets, responsive image derivatives and historical file layout. Do not use it as a publishing branch.
 
-1. Audit the existing Publii site structure and assets.
-2. Define the target location and structure on the Inmech website.
-3. Create a migration checklist and content map.
-4. Create a structured plan for the NASU analytical note due 30 September 2026.
-5. Record major NCUTAM outputs in `activity-control/ACTIVITY_LEDGER.md` for reuse in institutional and annual reporting.
+`main` intentionally omits Publii theme/runtime assets and generated responsive-media trees that are no longer required by the compatibility stubs. Selected legacy downloadable files remain on `main` only to avoid unnecessary breakage of direct historical download links; they are frozen and are not authoritative copies.
+
+## Redirect maintenance
+
+If a current Inmech canonical route ever changes:
+
+1. update and deploy `mfs9697/inmech-site` first;
+2. verify the new production target;
+3. update `migration/legacy-routes.yaml` here;
+4. regenerate/commit the compatibility stubs with `scripts/wp7-redirects.mjs`;
+5. allow GitHub Pages to deploy;
+6. run the `Legacy NCUTAM redirect continuity` workflow manually and require all mapped URLs to pass.
+
+The detailed cutover and rollback record is in `docs/WP7_REDIRECT_CUTOVER.md`; the final freeze record is in `docs/WP10_ARCHIVE_FREEZE.md`.
+
+## Committee work outside the website
+
+The repository continues to track Committee-level tasks and project evidence in `TASKS.md`. Cross-cutting personal/institutional activity summaries should remain in `mfs9697/activity-control`, not be duplicated here.

@@ -1,3 +1,2 @@
 User-agent: *
-Disallow:
-Sitemap: https://mfs9697.github.io/ncutam/sitemap.xml
+Allow: /
