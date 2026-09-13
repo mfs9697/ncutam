@@ -53,12 +53,12 @@ Move the Committee's public content from the current Publii-generated site into 
    - route cleanup: duplicate Ukrainian/English `in-memoriam` route definitions removed, leaving one canonical data-driven route per language;
    - validation: `check:ncutam` validates membership/governance semantics, activity gallery paths/counts and bilingual alt text, activity-document references, while the document validator pins exact Git-blob hashes for all 19 published PDFs;
    - final visual/mobile/content/accessibility sweep: all **46 bilingual NCUTAM routes** were rendered in Chromium at desktop (1440×900) and mobile (390×844) sizes for **92 browser renders**. The sweep checked horizontal overflow, heading count, duplicate IDs, external-link safety, broken images, image alt text, stale migration placeholders, and WCAG 2.0/2.1 A/AA issues with axe-core. Corrections included the NCUTAM contact-anchor collision, generic eyebrow contrast, document-button styling, mobile/card wrapping, and Ukrainian desktop navigation crowding. The final browser sweep and full repository validation are green.
-7. **Redirect / continuity plan — NEXT.** Preserve important old URLs where technically feasible using the WP5 route map as the single redirect source; document unavoidable infrastructure limitations.
-8. **Validation — COMPLETE FOR WP6.** Build, sitemap, landmarks, internal links, membership/governance semantics, activity assets, document-byte integrity, and final desktop/mobile browser accessibility checks are green. Redirect/cutover validation belongs to WP7.
+7. **Redirect / continuity plan — PREPARED AND VALIDATED; ACTIVATION PENDING.** Draft PR `mfs9697/ncutam#1` on branch `feat/wp7-redirect-cutover` uses `migration/legacy-routes.yaml` as the single source of truth. The generator and workflow have validated **26 canonical legacy routes + 3 archive aliases**, verified every declared Ukrainian and English target against a fresh build of `mfs9697/inmech-site:feat/ncutam-wp6-infrastructure`, generated 29 exact-target redirect stubs plus a moved-site 404, and removed Publii artifacts classified as DROP. GitHub Pages cannot provide arbitrary repository-controlled HTTP 301/308 redirects for these existing static files, so the continuity layer uses immediate client-side/static forwarding with `rel=canonical` and `noindex,follow`; this limitation is documented in [`docs/WP7_REDIRECT_CUTOVER.md`](docs/WP7_REDIRECT_CUTOVER.md). Activation is deliberately gated: Inmech PR #114 must be merged and deployed successfully first, including the NCUTAM production smoke checks, before the legacy redirect PR may be merged.
+8. **Validation — COMPLETE FOR WP6; WP7 PRE-CUTOVER VALIDATION GREEN.** Build, sitemap, landmarks, internal links, membership/governance semantics, activity assets, document-byte integrity, final desktop/mobile browser accessibility checks, and pre-cutover old-to-new route-map validation are green. Live WP7 verification remains pending because neither cutover PR has been merged.
 9. **Update workflow.** Document how Committee news, documents, membership changes, conferences, meetings, governance data and media mentions will be maintained after migration.
-10. **Cutover / archive.** Switch the public destination when validated; retain the Publii export as historical source material rather than the active content system.
+10. **Cutover / archive — READY, NOT ACTIVATED.** The activation order and rollback procedure are documented. First deploy target PR #114 and verify the public NCUTAM routes; only then merge `mfs9697/ncutam#1`, verify legacy forwarding, and freeze the Publii export as historical source material.
 
-### Architectural decisions established by WP2–WP6
+### Architectural decisions established by WP2–WP7 preparation
 - NCUTAM is a first-class top-level institutional section of Inmech, but not an Institute structural unit.
 - The global menu exposes the short item `НКУТПМ / NCUTAM`, linking to `/ncutam/` and `/en/ncutam/`.
 - All durable NCUTAM routes use paired Ukrainian/English paths with the same ASCII slug structure.
@@ -77,14 +77,15 @@ Move the Committee's public content from the current Publii-generated site into 
 - The news language-block logic is generalized into a reusable bilingual-body utility while preserving backward-compatible news exports.
 - A dedicated `check:ncutam` semantic validator runs in addition to existing Inmech build/link/sitemap checks; document validation additionally pins exact binary hashes.
 - Contacts live on the landing page; a separate canonical NCUTAM contacts route is unnecessary.
-- The machine-readable `migration/legacy-routes.yaml` is the single source for the legacy-to-target mapping and should be reused by WP7 redirect/stub generation.
-- WP6 is frozen only after a successful full bilingual browser sweep at desktop/mobile widths in addition to the repository validation suite.
+- `migration/legacy-routes.yaml` remains the single source for legacy-to-target continuity and drives the WP7 redirect generator.
+- The legacy GitHub Pages continuity layer is a compatibility bridge, not the authoritative site; redirect stubs are `noindex,follow` and canonicalize to Inmech.
+- Cutover order is mandatory: deploy and verify Inmech first, then activate legacy forwarding.
 
 ### Immediate next milestone
-**WP7 — redirects and cutover continuity.** Reuse `migration/legacy-routes.yaml` to implement the feasible legacy redirects/stubs, validate old-to-new continuity, document any hosting constraints, and prepare the final cutover/archive procedure. Optional memorial-profile source enrichment may still be done opportunistically where trusted sources are readily verifiable, but it is non-blocking and outside WP6 closure.
+**WP7 activation gate.** Both repositories are technically prepared. The remaining WP7 work is operational: intentionally merge/deploy Inmech PR #114, require the production marker and NCUTAM smoke checks to pass, then merge `mfs9697/ncutam#1` and run live old-to-new browser verification. Until that sequence is explicitly started, both PRs remain draft and unmerged.
 
 ### Status
-**ACTIVE — WP1 through WP6 complete and green; WP7 redirect/cutover continuity is next. Draft PR #114 remains unmerged pending the redirect/cutover decision.**
+**ACTIVE — WP1 through WP6 complete; WP7 prepared and pre-cutover validation green. Activation is intentionally pending.**
 
 ---
 
