@@ -1,7 +1,7 @@
 version: 1
 sourceSite: "https://mfs9697.github.io/ncutam/"
 targetSite: "https://inmech.kyiv.ua/"
-updated: "2026-09-12"
+updated: "2026-09-18"
 
 routes:
   - legacy: "/"
@@ -111,11 +111,11 @@ routes:
 
   - legacy: "/pamyat.html"
     action: keep
-    target: "/ncutam/members/in-memoriam/"
-    targetEn: "/en/ncutam/members/in-memoriam/"
+    target: "/ncutam/members/former/"
+    targetEn: "/en/ncutam/members/former/"
     collection: ncutamMembers
     recordId: null
-    sourceOfTruth: "legacy list reconciled into member status data"
+    sourceOfTruth: "legacy list reconciled into the neutral former-member register and source-backed membership data"
 
   - legacy: "/predstavnika-ukrayini-obrano-do-komitetu-rannoyi-karieri-iutam.html"
     action: redirect
